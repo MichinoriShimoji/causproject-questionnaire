@@ -38,3 +38,17 @@ python3 -m http.server 8000 --directory _site
 ```
 
 ブラウザで http://localhost:8000/ を開きます。
+
+## ブラウザで編集した最新版を配布する
+
+「バックアップ保存」で保存したJSONから、例文・和訳・優先度・画像選択だけをHTML本体に取り込めます。回答、メモ、話者ID、日付、進捗は取り込みません。
+
+```sh
+python3 scripts/sync_questionnaire.py /path/to/backup.json
+python3 scripts/build_site.py
+git add questionnaire-compact.html
+git commit -m "Update shared questionnaire settings"
+git push
+```
+
+バックアップJSONそのものはリポジトリに追加しないでください。独自に追加したカードがある場合は、公開用の番号・内容を確認してから取り込みます。
